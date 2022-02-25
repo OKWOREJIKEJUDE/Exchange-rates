@@ -14,6 +14,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String displayNumber = "";
   TextEditingController myController = TextEditingController();
+  String dropdownValue1 = "AUD";
+  String dropdownValue2 = "AUD";
+  List<String> spinnerItems = ['AUD', 'NGR', 'USD', 'EUR', 'YPD', 'CMR', 'UDP'];
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +53,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Container(
               margin: EdgeInsets.only(right: 5),
+              padding: EdgeInsets.only(left: 20),
               height: 50.0,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15.0),
@@ -65,10 +69,10 @@ class _HomePageState extends State<HomePage> {
                   hintText: "Enter amount to convert",
                 ),
                 keyboardType: TextInputType.number,
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.start,
                 style: TextStyle(
                     color: Colors.blue,
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -77,6 +81,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Container(
               margin: EdgeInsets.only(right: 5),
+              padding: EdgeInsets.only(left: 5),
               height: 50.0,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15.0),
@@ -86,46 +91,48 @@ class _HomePageState extends State<HomePage> {
                 //SINGLECHILDSCROWVIEW ENABLES THE COLUMN NOT TO OVERFLOW IN PIXEL//
                 child: Column(children: [
                   ListTile(
-                    title: Text(
-                      ('$displayNumber'),
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    trailing: IconButton(
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content:
-                                  Text("Select your currency to convert")));
-                        },
-                        icon: Icon(Icons.arrow_drop_down)),
-                    // NB==THERE IS AN OVERFLOW PIXEL ERROW HERE IN LEADING WIDGET THAT MAKES IT NOT TO ALLIGN VERY WELL
-                    leading: Container(
-                      width: 70,
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 15,
-                            backgroundImage:
-                                AssetImage("assets/images/ejykeman.png"),
-                          ),
-                          SizedBox(width: 10),
-                          Text("USD"),
-                        ],
+                      title: Text(
+                        ('$displayNumber'),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
                       ),
-                    ),
+                      //todo:////////////////FIRST SPINNER DROPDOWN//////////////////////////////////////////////////////
+                      trailing: _builddropdownbutton(dropdownValue1)
+                      // DropdownButton<String>(
+                      //   value: dropdownValue1,
+                      //   icon: Icon(Icons.arrow_drop_down),
+                      //   iconSize: 24,
+                      //   underline: Container(
+                      //     height: 0,
+                      //   ),
+                      //   //elevation: 16,
+                      //   style: TextStyle(color: Colors.black, fontSize: 15),
+                      //   onChanged: (String? datass) {
+                      //     // setState(() {
+                      //     //   dropdownValue1 = datass!;
+                      //     // });
+                      //     if (dropdownValue1 == dropdownValue11) {
+                      //       _onFromChanged(datass);
+                      //     } else {
+                      //       _onToChanged(datass);
+                      //     }
+                      //   },
+                      //   items: spinnerItems
+                      //       .map<DropdownMenuItem<String>>((String value) {
+                      //     return DropdownMenuItem<String>(
+                      //       value: value,
+                      //       child: Text(value),
+                      //     );
+                      //   }).toList(),
+                      // ),
 
-                    // leading: CircleAvatar(
-                    //   radius: 10,
-                    //   backgroundImage:
-                    //       AssetImage("assets/images/ejykeman.png"),
-                    // ),
-                  ),
+                      ),
                 ]),
               ),
             ),
-
+            //todo:////////////////ICON BUTTON///////////////////////////////////////////////////////////////////////////
             IconButton(
                 onPressed: () {
                   setState(() {
@@ -136,8 +143,10 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               width: 20,
             ),
+            //todo:////////////////SECOND SPINNER DROPDOWN//////////////////////////////////////////////////////
             Container(
               margin: EdgeInsets.only(right: 5),
+              padding: EdgeInsets.only(left: 5),
               height: 50.0,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15.0),
@@ -147,186 +156,42 @@ class _HomePageState extends State<HomePage> {
                 //SINGLECHILDSCROWVIEW ENABLES THE COLUMN NOT TO OVERFLOW IN PIXEL//
                 child: Column(children: [
                   ListTile(
-                    title: Text(
-                      "1.37",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    trailing: IconButton(
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(
-                                  "Your currency will be converted here")));
-                        },
-                        icon: Icon(Icons.arrow_drop_down)),
-                    // leading: CircleAvatar(
-                    //   radius: 10,
-                    //   backgroundImage: AssetImage("assets/images/ejykeman.png"),
-                    // ),
-                    leading: Container(
-                      // NB==THERE IS AN OVERFLOW PIXEL ERROW HERE IN LEADING WIDGET THAT MAKES IT NOT TO ALLIGN VERY WELL
-                      width: 70,
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 15,
-                            backgroundImage:
-                                AssetImage("assets/images/ejykeman.png"),
-                          ),
-                          SizedBox(width: 10),
-                          Text("NGR"),
-                        ],
+                      title: Text(
+                        (" "),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
                       ),
-                    ),
-                  ),
+                      trailing: _builddropdownbutton(dropdownValue2)
+                      // DropdownButton<String>(
+                      //   value: dropdownValue1,
+                      //   icon: Icon(Icons.arrow_drop_down),
+                      //   iconSize: 24,
+                      //   underline: Container(
+                      //     height: 0,
+                      //   ),
+                      //   //elevation: 16,
+                      //   style: TextStyle(color: Colors.black, fontSize: 15),
+                      //   onChanged: (String? data) {
+                      //     setState(() {
+                      //       dropdownValue1 = data!;
+                      //     });
+                      //   },
+                      //   items: spinnerItems
+                      //       .map<DropdownMenuItem<String>>((String value) {
+                      //     return DropdownMenuItem<String>(
+                      //       value: value,
+                      //       child: Text(value),
+                      //     );
+                      //   }).toList(),
+                      // ),
+
+                      // NB==THERE IS AN OVERFLOW PIXEL ERROW HERE IN LEADING WIDGET THAT MAKES IT NOT TO ALLIGN VERY WELL
+                      ),
                 ]),
               ),
             ),
-
-            // Container(
-            //   margin: EdgeInsets.only(right: 5),
-            //   height: 50.0,
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(15.0),
-            //     color: Color(0xFFc4c4c4).withOpacity(0.5),
-            //   ),
-            //   child: Row(
-            //     mainAxisAlignment:
-            //         MainAxisAlignment.spaceEvenly, //SPACED EVENLY HERE//
-            //     children: [
-            //       //THIS IS WHERE THE CONTAINER THAT WRAPS THE FIRST DROPDOWN STARTED///
-            //       InkWell(
-            //         onTap: () {
-            //           ScaffoldMessenger.of(context).showSnackBar(
-            //               SnackBar(content: Text("Choose your currency")));
-            //         },
-            //         child: Container(
-            //           decoration: BoxDecoration(
-            //             borderRadius: BorderRadius.circular(5.0),
-            //             color: Color(0xFFc4c4c4).withOpacity(0.5),
-            //           ),
-            //           child: Row(
-            //             //mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //             children: [
-            //               CircleAvatar(
-            //                 radius: 10,
-            //                 backgroundImage:
-            //                     AssetImage("assets/images/ejykeman.png"),
-            //               ),
-            //               SizedBox(
-            //                 width: 5,
-            //               ),
-            //               Text("USD",
-            //                   style: TextStyle(
-            //                     fontSize: 10,
-            //                     fontWeight: FontWeight.bold,
-            //                     color: Colors.black,
-            //                   )),
-            //               Padding(
-            //                 padding:
-            //                     const EdgeInsets.only(bottom: 30, right: 30),
-            //                 child: Container(
-            //                   height: 1,
-            //                   width: 1,
-            //                   child: IconButton(
-            //                       onPressed: () {},
-            //                       icon: Icon(
-            //                         Icons.arrow_drop_down,
-            //                         size: 20,
-            //                       )),
-            //                 ),
-            //               ),
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //       SizedBox(
-            //         width: 5,
-            //       ),
-
-            //       Text(
-            //         ('$displayNumber'),
-            //         style: TextStyle(
-            //             color: Colors.black,
-            //             fontSize: 15,
-            //             fontWeight: FontWeight.bold),
-            //       ),
-
-            //       SizedBox(
-            //         width: 30,
-            //       ),
-
-            //       IconButton(
-            //           onPressed: () {
-            //             setState(() {
-            //               displayNumber = myController.text;
-            //             });
-            //           },
-            //           icon: Icon(Icons.arrow_forward)),
-            //       SizedBox(
-            //         width: 30,
-            //       ),
-            //       //THIS IS WHERE THE CONTAINER THAT WRAPS THE SECOND DROPDOWN STARTED///
-            //       InkWell(
-            //         onTap: () {
-            //           ScaffoldMessenger.of(context).showSnackBar(
-            //               SnackBar(content: Text("Choose your currency")));
-            //         },
-            //         child: Container(
-            //           // height: 10,
-            //           // width: 10,
-            //           decoration: BoxDecoration(
-            //             borderRadius: BorderRadius.circular(5.0),
-            //             color: Color(0xFFc4c4c4).withOpacity(0.5),
-            //           ),
-            //           child: Row(
-            //             //mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //             children: [
-            //               CircleAvatar(
-            //                 radius: 10,
-            //                 backgroundImage:
-            //                     AssetImage("assets/images/ejykeman.png"),
-            //               ),
-            //               SizedBox(
-            //                 width: 5,
-            //               ),
-            //               Text("NGR",
-            //                   style: TextStyle(
-            //                     fontSize: 10,
-            //                     fontWeight: FontWeight.bold,
-            //                     color: Colors.black,
-            //                   )),
-            //               Padding(
-            //                 padding:
-            //                     const EdgeInsets.only(bottom: 30, right: 30),
-            //                 child: Container(
-            //                   height: 1,
-            //                   width: 1,
-            //                   child: IconButton(
-            //                       onPressed: () {},
-            //                       icon: Icon(
-            //                         Icons.arrow_drop_down,
-            //                         size: 20,
-            //                       )),
-            //                 ),
-            //               ),
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-
-            //       Text(
-            //         "1.37",
-            //         style: TextStyle(
-            //             color: Colors.black,
-            //             fontSize: 15,
-            //             fontWeight: FontWeight.bold),
-            //       ),
-            //     ],
-            //   ),
-            // ),
             SizedBox(
               height: 20,
             ),
@@ -344,50 +209,15 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 10,
             ),
-
-            // THIS IS WHERE MY GRIDVIEW ITEMS IS SHOWING IN THREE PER ROW//
-            // Container(
-            //   //height: double.minPositive,
-            //   width: double.infinity,
-            //   child: MyGridView(),
-            // ),
-            // Container(
-            //   height: 300,
-            //   width: double.infinity,
-            //   child: MyGridView(),
-
-            //   // _myGrid();
-            // ),
-            // Stack(
-            //   children: <Widget>[
-            //     Container(
-            //       alignment: Alignment.bottomCenter,
-            //       height: 35.0,
-            //       width: 120,
-            //       decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(15.0),
-            //         color: Color(0xFFc4c4c4).withOpacity(0.5),
-            //       ),
-            //       child: Center(
-            //           child: Text(
-            //         "view more currencies",
-            //         style: TextStyle(color: Colors.black, fontSize: 10),
-            //       )),
-            //     ),
-            //   ],
-            // ),
-            Container(
-              height: 300,
-              width: double.infinity,
-              color: Colors.red,
-              child: Stack(
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: FloatingActionButton(
-                        child: Icon(Icons.add), onPressed: () {}),
-                  )
-                ],
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: 30.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.0),
+                  color: Color(0xff0000FF).withOpacity(0.5),
+                ),
+                child: Center(child: Text("View more currencies")),
               ),
             ),
           ],
@@ -395,8 +225,34 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
 
-void _myGrid() {
-  MyGridView();
+  Widget _builddropdownbutton(String currencyCategory) {
+    return DropdownButton<String>(
+      value: currencyCategory,
+      icon: Icon(Icons.arrow_drop_down),
+      iconSize: 24,
+      underline: Container(
+        height: 0,
+      ),
+      //elevation: 16,
+      style: TextStyle(color: Colors.black, fontSize: 15),
+      onChanged: (String? datass) {
+        if (dropdownValue1 == currencyCategory) {
+          setState(() {
+            dropdownValue1 = datass!;
+          });
+        } else {
+          setState(() {
+            dropdownValue2 = datass!;
+          });
+        }
+      },
+      items: spinnerItems.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
 }
